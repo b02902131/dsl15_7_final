@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     int sockfd1,sockfd2, newsockfd1,newsockfd2, portno1,portno2;
     char name[128], location[128];
     char data[10][128];
+    char buf2[1024];
     int option;
     socklen_t clilen1,clilen2;
     char buffer[256];
@@ -69,21 +70,20 @@ int main(int argc, char *argv[])
         if (n < 0) error("ERROR reading from socket");
 
         sscanf(buffer,"%d",&option);
-        switch(option[0]){
+        switch(option){
             case 0:
             //user retrieve info
-                char buf2[1024];
                 bzero(buf2,1023);
-                ssprintf(buf2,"%s %s %s %s %s %s",name[0],location[0],name[1],location[1],name[2],location[2]);
+                sprintf(buf2,"%s %s %s %s %s %s",name[0],location[0],name[1],location[1],name[2],location[2]);
                 write(newsockfd1,buf2,strlen(buf2));
                 printf("written!\n");
                 break;
             case 1:
             //user upload info
                 sscanf(buffer,"%d %s %s",&option,name,location);
-                if(name[0] == 'X')  strcpy(name[0], location);
-                if(name[0] == 'B')  strcpy(name[1], location);
-                if(name[0] == 'R')  strcpy(name[2], location);
+                if(name[0] == 'X')  strcpy(data[0], location);
+                if(name[0] == 'B')  strcpy(data[1], location);
+                if(name[0] == 'R')  strcpy(data[2], location);
                 printf("saved!\n");
                 break;
         }
