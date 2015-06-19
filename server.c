@@ -18,13 +18,14 @@ int main(int argc, char *argv[])
 {
     int sockfd1,sockfd2, newsockfd1,newsockfd2, portno1,portno2;
     char name[128], location[128];
-    char data[10][128];
+    char l_data[10][128];
+    char n_data[10][128];
     char buf2[1024];
     int option;
     socklen_t clilen1,clilen2;
     char buffer[256];
     struct sockaddr_in serv_addr1, cli_addr1,serv_addr2, cli_addr2;
-    int n,flag=0;
+    int n,flag=0,i;
     if (argc < 2) {
         fprintf(stderr,"ERROR, no port provided\n");
         exit(1);
@@ -44,9 +45,10 @@ int main(int argc, char *argv[])
         error("ERROR on binding");
     listen(sockfd1,5);
     clilen1 = sizeof(cli_addr1);
-    // newsockfd1 = accept(sockfd1, (struct sockaddr *) &cli_addr1,  &clilen1);
-    // if (newsockfd1 < 0) error("ERROR on accept");
-    //     printf("connected\n");
+    for(i = 0;i <3;i++){
+        bzero(n_data[i],127);
+        bzero(l_data[i],127);
+    }
 
 
     while(1)
@@ -56,49 +58,44 @@ int main(int argc, char *argv[])
         if (newsockfd1 < 0) error("ERROR on accept");
             printf("connected\n");
         
-        //listen(sockfd1,5);
-        //clilen1 = sizeof(cli_addr1);
-        // newsockfd2 = accept(sockfd1, (struct sockaddr *) &cli_addr1,  &clilen1);
-        // if (newsockfd1 < 0) error("ERROR on accept");
-        // flag =1;
-        //printf("%d\n",newsockfd1);
-
         bzero(buffer,256);
         bzero(name,127);
         bzero(location,127);
+        option = -1;
         n = read(newsockfd1,buffer,255);
+        printf("read: %s\n",buffer);
         if (n < 0) error("ERROR reading from socket");
 
         sscanf(buffer,"%d",&option);
+        printf("received option %d\n",option);
         switch(option){
             case 0:
             //user retrieve info
                 bzero(buf2,1023);
-                sprintf(buf2,"%s %s %s %s %s %s",name[0],location[0],name[1],location[1],name[2],location[2]);
+                sprintf(buf2,"%s %s %s %s %s %s",n_data[0],l_data[0],n_data[1],l_data[1],n_data[2],l_data[2]);
                 write(newsockfd1,buf2,strlen(buf2));
-                printf("written!\n");
+                printf("send %s\n",buf2);
                 break;
             case 1:
             //user upload info
                 sscanf(buffer,"%d %s %s",&option,name,location);
-                if(name[0] == 'X')  strcpy(data[0], location);
-                if(name[0] == 'B')  strcpy(data[1], location);
-                if(name[0] == 'R')  strcpy(data[2], location);
-                printf("saved!\n");
+                if(name[0] == 'X'){
+                    strcpy(n_data[0], name);
+                    strcpy(l_data[0], location);
+                }
+                if(name[0] == 'B'){
+                    strcpy(n_data[1], name);
+                    strcpy(l_data[1], location);
+                }
+                if(name[0] == 'R'){
+                    strcpy(n_data[2], name);
+                    strcpy(l_data[2], location);
+                }
+
+
                 break;
         }
 
-
-        // if( strcmp(buffer,"end") == 0)
-        // {
-        //     printf("connet end\n");
-        //     close(newsockfd2);
-        //     flag = 0;
-        //     break;
-        // }
-        printf("receive message: %s\n",buffer);
-        // if(n>2) n = write(newsockfd1,buffer,255);
-        // if (n < 0) error("ERROR writing to socket");
         n=0;
 
     } 
