@@ -6,8 +6,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#
-
 void error(const char *msg)
 {
     perror(msg);
@@ -21,6 +19,8 @@ int main(int argc, char *argv[])
     char l_data[10][128];
     char n_data[10][128];
     char buf2[1024];
+    char offline[] = "(offline)";
+    char none[] = "(none)";
     int option;
     socklen_t clilen1,clilen2;
     char buffer[256];
@@ -48,6 +48,8 @@ int main(int argc, char *argv[])
     for(i = 0;i <3;i++){
         bzero(n_data[i],127);
         bzero(l_data[i],127);
+        strcpy(n_data[i],offline);
+        strcpy(l_data[i],none);
     }
 
 
@@ -72,7 +74,12 @@ int main(int argc, char *argv[])
             case 0:
             //user retrieve info
                 bzero(buf2,1023);
-                sprintf(buf2,"%s %s %s %s %s %s",n_data[0],l_data[0],n_data[1],l_data[1],n_data[2],l_data[2]);
+                for(i = 0;i <3;i++){
+                    strcat(buf2,n_data[i]);
+                    strcat(buf2," ");
+                    strcat(buf2,l_data[i]);
+                    strcat(buf2," ");
+                }
                 write(newsockfd1,buf2,strlen(buf2));
                 printf("send %s\n",buf2);
                 break;
@@ -80,14 +87,20 @@ int main(int argc, char *argv[])
             //user upload info
                 sscanf(buffer,"%d %s %s",&option,name,location);
                 if(name[0] == 'X'){
+                    bzero(n_data[0],127);
+                    bzero(l_data[0],127);
                     strcpy(n_data[0], name);
                     strcpy(l_data[0], location);
                 }
                 if(name[0] == 'B'){
+                    bzero(n_data[1],127);
+                    bzero(l_data[1],127);
                     strcpy(n_data[1], name);
                     strcpy(l_data[1], location);
                 }
                 if(name[0] == 'R'){
+                    bzero(n_data[2],127);
+                    bzero(l_data[2],127);
                     strcpy(n_data[2], name);
                     strcpy(l_data[2], location);
                 }
