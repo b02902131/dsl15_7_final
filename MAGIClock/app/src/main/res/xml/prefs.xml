@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        android:title="Login information" >
+        <EditTextPreference
+            android:key="your name"
+            android:summary="Please enter your name"
+            android:title="Name" />
+        <EditTextPreference
+            android:key="Group name"
+            android:summary="Enter your group name"
+            android:title="Group name" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Network Settings" >
+        <EditTextPreference
+            android:key="host"
+            android:summary="Enter server host name"
+            android:title="server IP" />
+
+        <EditTextPreference
+            android:key="port"
+            android:summary="Enter port number"
+            android:title="port" />
+    </PreferenceCategory>
+</PreferenceScreen>
