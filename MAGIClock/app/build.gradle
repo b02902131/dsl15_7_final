@@ -12,6 +12,7 @@ android {
         versionName "1.0"
     }
     buildTypes {
+<<<<<<< HEAD
         debug {
             debuggable true
         }
@@ -22,6 +23,12 @@ android {
     }
     lintOptions {
         abortOnError false
+=======
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+>>>>>>> 57b4dc53d69f564b4977a12625cfa6c036408c07
     }
 }
 
@@ -29,5 +36,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:support-v4:22.1.1'
+<<<<<<< HEAD
     compile files('libs/jsoup-1.8.2.jar')
+=======
+>>>>>>> 57b4dc53d69f564b4977a12625cfa6c036408c07
 }

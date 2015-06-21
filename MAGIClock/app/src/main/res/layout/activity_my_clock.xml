@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+=======
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+>>>>>>> 57b4dc53d69f564b4977a12625cfa6c036408c07
 
     <!--Button
         android:id="@+id/btnGetPreferences"
@@ -13,13 +19,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="match_parent"
         android:background="@color/material_deep_teal_500">
+=======
+        android:layout_height="match_parent">
+>>>>>>> 57b4dc53d69f564b4977a12625cfa6c036408c07
 
         <TextView
             android:id="@+id/txtPrefs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:textSize="25dp"
             android:text="222222"
             android:textColor="#8C0044"
@@ -47,12 +58,33 @@
             android:layout_marginRight="18dp"
             android:layout_marginTop="18dp"
             android:longClickable="true" />
+=======
+            android:textSize="15dp"
+            android:text="222222"
+            android:layout_alignBottom="@+id/btnPrefs"
+            android:layout_toLeftOf="@+id/fmtext"
+            android:layout_toStartOf="@+id/fmtext" />
+
+        <Button
+            android:id="@+id/btnPrefs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SETTINGS"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="91dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginEnd="65dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+>>>>>>> 57b4dc53d69f564b4977a12625cfa6c036408c07
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
+<<<<<<< HEAD
             android:textColor="#FFFFFF"
             android:textSize="35dp"
             android:id="@+id/fmtext"
@@ -144,6 +176,21 @@
             android:layout_alignLeft="@+id/server"
             android:layout_alignStart="@+id/server" />
 
+=======
+            android:id="@+id/fmtext"
+            android:layout_marginTop="77dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_above="@+id/btnPrefs"
+            android:layout_alignLeft="@+id/txtPrefs"
+            android:layout_alignStart="@+id/txtPrefs"
+            android:src="@drawable/profile"/>
+>>>>>>> 57b4dc53d69f564b4977a12625cfa6c036408c07
 
         <!--<Button-->
             <!--android:id="@+id/camera"-->
